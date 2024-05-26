@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="transparant">#00FFFFFF</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="whitesecond">#f3f2ff</color>
+    <color name="TextColor">#011847</color>
+<!--    <color name="ButtonColor">#5f5aff</color>-->
+    <color name="ButtonColor">#46B4E3</color>
+    <color name="IconColor">#6d61ff</color>
+    <color name="Pemasukan">#2fe06d</color>
+    <color name="Pengeluaran">#e02f2f</color>
+    <color name="IconBackgroundColor">#011847</color>
+
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+</resources>

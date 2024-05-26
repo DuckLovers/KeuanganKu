@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">KeuanganKu</string>
+    <string name="nama_user">Aidhil</string>
+    <string name="beranda_pengeluaran">Pengeluaran Anda Bulan Ini</string>
+    <string name="keuntungan">Rp 53.000.000</string>
+    <string name="pemasukan">Rp 300.000.000</string>
+    <string name="Pengeluaran">Rp 247.000.000</string>
+</resources>

@@ -1,0 +1,16 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="500dp"
+    android:height="100dp"
+    android:viewportWidth="400"
+    android:viewportHeight="400">
+
+    <!-- Lingkaran besar sebagai background -->
+    <path
+        android:pathData="M 0,200 A 200,200 0 0 1 400,200 L 400,400 L 0,400 Z"
+        android:fillColor="@color/IconBackgroundColor"/>
+
+    <!-- Lingkaran setengah ke bawah -->
+    <path
+        android:pathData="M 0,200 A 200,200 0 0 1 400,200"
+        android:fillColor="@color/IconBackgroundColor"/>
+</vector>

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UpdateCatatan">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:orientation="horizontal"
+            android:background="@drawable/card_background"
+            android:elevation="4dp"
+            android:layout_gravity="center">
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginHorizontal="25dp"
+                android:layout_gravity="center"
+                android:src="@drawable/backarrow"
+                android:clickable="true"
+                android:onClick="backToMain"
+                app:tint="@color/IconColor" />
+            <TextView
+                android:layout_width="250dp"
+                android:layout_height="50dp"
+                android:layout_margin="20dp"
+                android:text="Edit Transaksi"
+                android:textColor="@color/IconColor"
+                android:textSize="25dp"
+                android:layout_gravity="center"
+                android:gravity="center"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp">
+            <Button
+                android:id="@+id/pengeluaranButton2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginRight="10dp"
+                android:text="Pengeluaran"
+                android:backgroundTint="@color/Pengeluaran"
+                android:textSize="20dp"/>
+            <Button
+                android:id="@+id/pemasukanButton2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="10dp"
+                android:text="Pemasukan"
+                android:backgroundTint="@color/ButtonColor"
+                android:onClick="changeColorPemasukan"
+                android:textSize="20dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:gravity="center"
+            android:layout_gravity="bottom">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rp"
+                android:gravity="bottom"/>
+
+            <EditText
+                android:id="@+id/inputNominal2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="0"
+                android:textSize="60dp"
+                android:inputType="number"/>
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/inputKeterangan2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:inputType="text"
+            android:hint="Keterangan"
+            android:textSize="30dp"/>
+
+        <EditText
+            android:id="@+id/inputKategori2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:hint="Kategori"
+            android:clickable="true"
+            android:onClick="toListKategori"
+            android:editable="false"
+            android:textSize="30dp"/>
+
+        <EditText
+            android:id="@+id/editTextTanggal2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:inputType="none"
+            android:hint="Tanggal"
+            android:editable="false"
+            android:textSize="30dp" />
+
+        <Button
+            android:id="@+id/updateButton"
+            android:layout_width="332dp"
+            android:layout_height="60dp"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="@color/ButtonColor"
+            android:text="Simpan"
+            android:textSize="24dp"
+            android:layout_gravity="center_horizontal"/>
+        <Button
+            android:id="@+id/deleteButton"
+            android:layout_width="332dp"
+            android:layout_height="60dp"
+            android:layout_marginBottom="40dp"
+            android:backgroundTint="@color/Pengeluaran"
+            android:text="Hapus"
+            android:textSize="24dp"
+            android:layout_gravity="center_horizontal"/>
+    </LinearLayout>
+
+    <!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        android:background="@drawable/card_background"-->
+    <!--        android:elevation="4dp"-->
+    <!--        app:menu="@menu/bottom_nav_menu"/>-->
+    <!--</androidx.constraintlayout.widget.ConstraintLayout>-->
+</androidx.constraintlayout.widget.ConstraintLayout>
