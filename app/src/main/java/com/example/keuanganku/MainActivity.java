@@ -29,7 +29,6 @@ import java.util.Locale;
 import java.util.List;
 
 import android.widget.PopupMenu;
-import android.widget.Toast;
 
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
@@ -167,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
                 String todayDate = dateFormat.format(new Date());
 
-                Cursor cursor = myDB.searchTransaksibyDate(todayDate);
+                Cursor cursor = myDB.getTransaksibyDate(todayDate);
                 storeDataInArray(cursor);
             }
         });
@@ -214,7 +213,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextChange(String newText) {
                 Cursor cursor;
-                cursor = myDB.searchTransaksiByName(newText);
+                cursor = myDB.getTransaksiByName(newText);
                 storeDataInArray(cursor);
                 return true;
             }

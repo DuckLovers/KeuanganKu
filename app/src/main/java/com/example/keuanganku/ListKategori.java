@@ -1,6 +1,7 @@
 package com.example.keuanganku;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,6 +30,7 @@ public class ListKategori extends AppCompatActivity {
 
     KategoriListAdapter adapter;
     RecyclerView listKategori;
+    SearchView searchView;
 
     boolean isInput;
 
@@ -46,18 +48,26 @@ public class ListKategori extends AppCompatActivity {
 
         listKategori = findViewById(R.id.listKategori);
         backButton = findViewById(R.id.listKategoriBackButton);
+        searchView = findViewById(R.id.searchKategori);
         kategori_id = new ArrayList<>();
         kategori_nama = new ArrayList<>();
         kategori_jenis = new ArrayList<>();
 
         // Mengambil jenis kategori dari masukancatatan
         getAndSetIntentData();
-        storeDataInArray();
 
         // Create the adapter
         adapter = new KategoriListAdapter(ListKategori.this, this, kategori_id, kategori_nama, kategori_jenis, isInput);
         listKategori.setAdapter(adapter);
         listKategori.setLayoutManager(new LinearLayoutManager(ListKategori.this));
+
+        Cursor cursor;
+        if (jenis.equals("pemasukan")) {
+            cursor = myDB.readPemasukanKategori();
+        } else{
+            cursor = myDB.readPengeluaranKategori();
+        }
+        storeDataInArray(cursor);
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,16 +75,28 @@ public class ListKategori extends AppCompatActivity {
                 backButtonMethod(v, isInput);
             }
         });
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                Cursor cursor;
+                if (jenis.equals("pemasukan")) {
+                    cursor = myDB.getKategoriByNamePemasukan(newText);
+                } else{
+                    cursor = myDB.getKategoriByNamePengeluaran(newText);
+                }
+                storeDataInArray(cursor);
+                return true;
+            }
+        });
     }
 
-    void storeDataInArray() {
-        Cursor cursor;
-        if (jenis.equals("pemasukan")) {
-            cursor = myDB.readPemasukanKategori();
-        } else{
-            cursor = myDB.readPengeluaranKategori();
-        }
-
+    void storeDataInArray(Cursor cursor) {
         kategori_id.clear();
         kategori_nama.clear();
         kategori_jenis.clear();
@@ -85,6 +107,7 @@ public class ListKategori extends AppCompatActivity {
             kategori_jenis.add(cursor.getString(2));
         }
         cursor.close();  // Jangan lupa menutup cursor setelah tidak digunakan lagi
+        adapter.notifyDataSetChanged();
     }
 
     void getAndSetIntentData(){

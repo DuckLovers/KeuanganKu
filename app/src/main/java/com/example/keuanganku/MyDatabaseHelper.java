@@ -217,6 +217,34 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
+    Cursor getKategoriByNamePemasukan(String name) {
+        String query = "SELECT * " +
+                "FROM " + TABLE_CATEGORY +
+                " WHERE " + COLUMN_CATEGORY_NAME + " LIKE ? " +
+                " AND " + COLUMN_CATEGORY_TYPE + " = 'pemasukan'";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = null;
+        if (db != null) {
+            cursor = db.rawQuery(query, new String[]{"%" + name + "%"});
+        }
+        return cursor;
+    }
+
+    Cursor getKategoriByNamePengeluaran(String name) {
+        String query = "SELECT * " +
+                "FROM " + TABLE_CATEGORY +
+                " WHERE " + COLUMN_CATEGORY_NAME + " LIKE ? " +
+                " AND " + COLUMN_CATEGORY_TYPE + " = 'pengeluaran'";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = null;
+        if (db != null) {
+            cursor = db.rawQuery(query, new String[]{"%" + name + "%"});
+        }
+        return cursor;
+    }
+
+
+
     // Metode untuk menambahkan data default ke tabel Kategori
     private void addDefaultKategori(SQLiteDatabase db) {
         ContentValues values = new ContentValues();
@@ -324,7 +352,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-    Cursor searchTransaksiByName(String name){
+    Cursor getTransaksiByName(String name){
         String query = "SELECT *, " +
                 "strftime('%Y-%m-%d', " + COLUMN_TRANSACTION_DATE + ") AS date_formatted " +
                 "FROM " + TABLE_TRANSACTION +
@@ -357,7 +385,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-    Cursor searchTransaksibyDate(String tanggal){
+    Cursor getTransaksibyDate(String tanggal){
         String query = "SELECT *, " +
                 "strftime('%Y-%m-%d', " + COLUMN_TRANSACTION_DATE + ") AS date_formatted " +
                 "FROM " + TABLE_TRANSACTION +
