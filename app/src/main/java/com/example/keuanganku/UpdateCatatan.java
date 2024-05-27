@@ -29,7 +29,7 @@ public class UpdateCatatan extends AppCompatActivity {
     boolean isInput = false;
 
     String jenis = "pengeluaran", kategori_nama, nominal, keterangan, tanggal;
-    SharedPreferences sp;
+    SharedPreferences sp, sp2;
     MyDatabaseHelper db;
 
     @Override
@@ -39,6 +39,7 @@ public class UpdateCatatan extends AppCompatActivity {
 
         db = new MyDatabaseHelper(this);
         sp = getApplicationContext().getSharedPreferences("UpdateCatatanPrefs", Context.MODE_PRIVATE);
+        sp2 = getApplicationContext().getSharedPreferences("IsInput", Context.MODE_PRIVATE);
 
         inputKeterangan = findViewById(R.id.inputKeterangan2);
         inputTanggal = findViewById(R.id.editTextTanggal2);
@@ -284,6 +285,24 @@ public class UpdateCatatan extends AppCompatActivity {
             jenis = getIntent().getStringExtra("jenis");
             kategori_nama = getIntent().getStringExtra("kategori_nama");
             inputKategori.setText(kategori_nama);
+
+            if ("pemasukan".equals(jenis)){
+                changeColorPemasukan();
+                resetColorPengeluaran();
+            } else {
+                changeColorPengeluaran();
+                resetColorPemasukan();
+            }
+        } else if (getIntent().hasExtra("jenis")) {
+            jenis = getIntent().getStringExtra("jenis");
+
+            if ("pemasukan".equals(jenis)){
+                changeColorPemasukan();
+                resetColorPengeluaran();
+            } else {
+                changeColorPengeluaran();
+                resetColorPemasukan();
+            }
         } else{
             Toast.makeText(this, "Data tidak ditemukan", Toast.LENGTH_SHORT).show();
         }
@@ -292,12 +311,16 @@ public class UpdateCatatan extends AppCompatActivity {
     private void getSharedPreferences(){
         nominal = sp.getString("nominal", "");
         keterangan = sp.getString("keterangan", "");
+        kategori_nama = sp.getString("kategori_nama", "");
+//        jenis = sp.getString("jenis", "");
         tanggal = sp.getString("tanggal", "");
         transaksi_id = sp.getInt("transaksi_id", 0);
         pengguna_id = sp.getInt("pengguna_id",0);
+        kategori_id = sp.getInt("kategori_id", 0);
 
         inputNominal.setText(nominal);
         inputKeterangan.setText(keterangan);
+        inputKategori.setText(kategori_nama);
         inputTanggal.setText(tanggal);
     }
 
@@ -319,8 +342,16 @@ public class UpdateCatatan extends AppCompatActivity {
         editor.putInt("pengguna_id", pengguna_id);
         editor.putString("nominal", nominal);
         editor.putString("keterangan", keterangan);
+        editor.putString("kategori_nama", kategori_nama);
+        editor.putInt("kategori_id", kategori_id);
+//        editor.putString("jenis", jenis);
         editor.putString("tanggal", tanggal);
         editor.commit();
+
+        sp2 = getSharedPreferences("IsInput", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor2 = sp2.edit();
+        editor2.putBoolean("isInput",  isInput);
+        editor2.commit();
 
         Intent intent = new Intent(this, ListKategori.class);
         intent.putExtra("jenis", jenis);

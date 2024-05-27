@@ -25,7 +25,6 @@
                     android:layout_gravity="center"
                     android:layout_marginHorizontal="25dp"
                     android:clickable="true"
-                    android:onClick="backToAddCatatan"
                     android:src="@drawable/backarrow"
                     app:tint="@color/IconColor" />
 

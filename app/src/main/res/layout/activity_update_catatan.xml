@@ -48,7 +48,7 @@
                 android:layout_marginRight="10dp"
                 android:text="Pengeluaran"
                 android:backgroundTint="@color/Pengeluaran"
-                android:textSize="18dp"/>
+                android:textSize="14dp"/>
             <Button
                 android:id="@+id/pemasukanButton2"
                 android:layout_width="wrap_content"
@@ -58,7 +58,7 @@
                 android:text="Pemasukan"
                 android:backgroundTint="@color/ButtonColor"
                 android:onClick="changeColorPemasukan"
-                android:textSize="18dp"/>
+                android:textSize="14dp"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"

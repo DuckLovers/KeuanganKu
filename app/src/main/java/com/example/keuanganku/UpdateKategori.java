@@ -31,7 +31,9 @@ public class UpdateKategori extends AppCompatActivity {
                 // And only then we call this
                 MyDatabaseHelper myDB = new MyDatabaseHelper(UpdateKategori.this);
                 myDB.updateKategori(kategori_id,
-                        inputKategori.getText().toString().trim(), jenis);
+                        inputKategori.getText().toString().trim(),
+                        jenis);
+                backToKategoriList(v);
             }
         });
     }

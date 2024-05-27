@@ -29,7 +29,7 @@ public class MasukanCatatan extends AppCompatActivity {
 
     MyDatabaseHelper db;
 
-    SharedPreferences sp;
+    SharedPreferences sp, sp2;
 
 
     @Override
@@ -39,6 +39,7 @@ public class MasukanCatatan extends AppCompatActivity {
         db = new MyDatabaseHelper(MasukanCatatan.this);
 
         sp = getApplicationContext().getSharedPreferences("InpurCatatanPrefs", Context.MODE_PRIVATE);
+        sp2 = getApplicationContext().getSharedPreferences("IsInput", Context.MODE_PRIVATE);
 
         inputKeterangan = findViewById(R.id.inputKeterangan);
         inputTanggal = findViewById(R.id.editTextTanggal);
@@ -263,6 +264,11 @@ public class MasukanCatatan extends AppCompatActivity {
         editor.putString("tanggal", tanggal);
         editor.putInt("pengguna_id", pengguna_id);
         editor.commit();
+
+        sp2 = getSharedPreferences("IsInput", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor2 = sp2.edit();
+        editor2.putBoolean("isInput",  isInput);
+        editor2.commit();
 
         Intent intent = new Intent(this, ListKategori.class);
         intent.putExtra("jenis", jenis);

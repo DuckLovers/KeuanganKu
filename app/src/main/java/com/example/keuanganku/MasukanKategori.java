@@ -14,9 +14,7 @@ public class MasukanKategori extends AppCompatActivity {
 
     EditText inputKategori;
     Button inputButton;
-    String jenis, keterangan, nominal, tanggal;
-    int pengguna_id;
-
+    String jenis;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,10 +38,6 @@ public class MasukanKategori extends AppCompatActivity {
     void getAndSetIntentData(){
         if(getIntent().hasExtra("jenis")){
             jenis = getIntent().getStringExtra("jenis");
-            pengguna_id = getIntent().getIntExtra("pengguna_id", 0);
-            nominal = getIntent().getStringExtra("nominal");
-            keterangan = getIntent().getStringExtra("keterangan");
-            tanggal = getIntent().getStringExtra("tanggal");
         } else {
             Toast.makeText(this, "Tidak ada jenis kategori yang terkirim", Toast.LENGTH_SHORT).show();
         }
@@ -52,10 +46,6 @@ public class MasukanKategori extends AppCompatActivity {
     public void backToKategoriList(View view) {
         Intent intent = new Intent(this, ListKategori.class);
         intent.putExtra("jenis", jenis);
-        intent.putExtra("nominal", nominal);
-        intent.putExtra("keterangan", keterangan);
-        intent.putExtra("tanggal", tanggal);
-        intent.putExtra("pengguna_id", pengguna_id);
         startActivity(intent);
     }
 }
