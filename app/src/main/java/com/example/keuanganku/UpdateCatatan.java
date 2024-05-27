@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -29,12 +30,14 @@ public class UpdateCatatan extends AppCompatActivity {
 
     String jenis = "pengeluaran", kategori_nama, nominal, keterangan, tanggal;
     SharedPreferences sp;
+    MyDatabaseHelper db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_catatan);
 
+        db = new MyDatabaseHelper(this);
         sp = getApplicationContext().getSharedPreferences("UpdateCatatanPrefs", Context.MODE_PRIVATE);
 
         inputKeterangan = findViewById(R.id.inputKeterangan2);
@@ -61,6 +64,20 @@ public class UpdateCatatan extends AppCompatActivity {
                 // Panggil fungsi untuk mengubah warna saat tombol ditekan
                 changeColorPemasukan();
                 resetColorPengeluaran();
+                Cursor cursor = db.getFirstKategoriPemasukan();
+
+                if (cursor != null && cursor.moveToFirst()) {
+                    kategori_id = cursor.getInt(0);
+                    inputKategori.setText(cursor.getString(1));
+                    jenis = cursor.getString(2);
+                } else {
+                    // Handle the case where the cursor is null or empty
+                    Toast.makeText(UpdateCatatan.this, "Tidak ada data pemasukan tersedia", Toast.LENGTH_SHORT).show();
+                }
+
+                if (cursor != null) {
+                    cursor.close();
+                }
             }
         });
 
@@ -74,6 +91,20 @@ public class UpdateCatatan extends AppCompatActivity {
                 // Panggil fungsi untuk mengubah warna saat tombol ditekan
                 changeColorPengeluaran();
                 resetColorPemasukan();
+                Cursor cursor = db.getFirstKategoriPengeluaran();
+
+                if (cursor != null && cursor.moveToFirst()) {
+                    kategori_id = cursor.getInt(0);
+                    inputKategori.setText(cursor.getString(1));
+                    jenis = cursor.getString(2);
+                } else {
+                    // Handle the case where the cursor is null or empty
+                    Toast.makeText(UpdateCatatan.this, "Tidak ada data pengeluaran tersedia", Toast.LENGTH_SHORT).show();
+                }
+
+                if (cursor != null) {
+                    cursor.close();
+                }
             }
         });
 

@@ -189,13 +189,15 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         // Handle item selection.
-                        if (item.getItemId() == R.id.navigation_kalkulator) {
-                            Intent kalkulatorIntent = new Intent(MainActivity.this, Kalkulator.class);
-                            startActivity(kalkulatorIntent);
-                            return true;
-                        } else if(item.getItemId() == R.id.navigtation_grafik){
+//                        if (item.getItemId() == R.id.navigation_kalkulator) {
+//                            Intent kalkulatorIntent = new Intent(MainActivity.this, Kalkulator.class);
+//                            startActivity(kalkulatorIntent);
+//                            return true;
+//                        } else
+                          if(item.getItemId() == R.id.navigtation_grafik){
                             Intent grafikIntent = new Intent(MainActivity.this, Grafik.class);
                             startActivity(grafikIntent);
+                            return true;
                         }
                         return false;
                     }
