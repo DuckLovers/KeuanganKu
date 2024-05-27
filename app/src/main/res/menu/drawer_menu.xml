@@ -8,4 +8,8 @@
         android:id="@+id/navigation_profile"
         android:title="Profile"
         android:icon="@drawable/beranda" />
+    <item
+        android:id="@+id/navigtation_grafik"
+        android:title="Grafik"
+        android:icon="@drawable/beranda" />
 </menu>

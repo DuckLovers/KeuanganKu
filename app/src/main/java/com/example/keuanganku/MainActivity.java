@@ -113,8 +113,6 @@ public class MainActivity extends AppCompatActivity {
                         if (selection != null) {
                             String tanggal1 = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date(selection.first));
                             String tanggal2 = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date(selection.second));
-                            // Gunakan tanggal1 dan tanggal2 sesuai kebutuhan
-                            Toast.makeText(MainActivity.this, "tanggal yang dipilih adalah tanggal " + tanggal1 + " Sampai tanggal " + tanggal2, Toast.LENGTH_SHORT).show();
                             Cursor cursor;
                             cursor = myDB.readTransaksiBetweenDate(tanggal1, tanggal2);
                             storeDataInArray(cursor);
@@ -195,6 +193,9 @@ public class MainActivity extends AppCompatActivity {
                             Intent kalkulatorIntent = new Intent(MainActivity.this, Kalkulator.class);
                             startActivity(kalkulatorIntent);
                             return true;
+                        } else if(item.getItemId() == R.id.navigtation_grafik){
+                            Intent grafikIntent = new Intent(MainActivity.this, Grafik.class);
+                            startActivity(grafikIntent);
                         }
                         return false;
                     }

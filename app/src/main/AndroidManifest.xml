@@ -13,6 +13,9 @@
         android:theme="@style/Theme.KeuanganKu"
         tools:targetApi="31">
         <activity
+            android:name=".Grafik"
+            android:exported="false" />
+        <activity
             android:name=".Kalkulator"
             android:exported="false" />
         <activity

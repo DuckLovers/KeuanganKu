@@ -401,4 +401,112 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
             Toast.makeText(context, "Berhasil Menghapus Data", Toast.LENGTH_SHORT).show();
         }
     }
+
+    //Method untuk total di grafik
+    public Cursor getTotalAmountByType() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT " + COLUMN_TRANSACTION_TYPE + ", SUM(" + COLUMN_TRANSACTION_AMOUNT + ") as total_amount " +
+                "FROM " + TABLE_TRANSACTION +
+                " GROUP BY " + COLUMN_TRANSACTION_TYPE;
+        Cursor cursor = null;
+        if (db != null){
+            cursor = db.rawQuery(query, null);
+        }
+        return cursor;
+    }
+
+    public Cursor getTotalAmountByTypeByMonth(String tahunBulaan) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT " + COLUMN_TRANSACTION_TYPE + ", SUM(" + COLUMN_TRANSACTION_AMOUNT + ") as total_amount " +
+                "FROM " + TABLE_TRANSACTION +
+                " WHERE strftime('%Y-%m', " + COLUMN_TRANSACTION_DATE + ") = ? " +
+                "GROUP BY " + COLUMN_TRANSACTION_TYPE;
+        Cursor cursor = null;
+        if (db != null){
+            cursor = db.rawQuery(query, new String[]{tahunBulaan});
+        }
+        return cursor;
+    }
+
+    public Cursor getTotalAmountByTypeByDate(String tanggal) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT " + COLUMN_TRANSACTION_TYPE + ", SUM(" + COLUMN_TRANSACTION_AMOUNT + ") as total_amount " +
+                "FROM " + TABLE_TRANSACTION +
+                " WHERE " + COLUMN_TRANSACTION_DATE + " = ? " +
+                "GROUP BY " + COLUMN_TRANSACTION_TYPE;
+        Cursor cursor = null;
+        if (db != null){
+            cursor = db.rawQuery(query, new String[]{tanggal});
+        }
+        return cursor;
+    }
+
+    public Cursor getTotalAmountByTypeBetweenDate(String tanggal1, String tanggal2) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT " + COLUMN_TRANSACTION_TYPE + ", SUM(" + COLUMN_TRANSACTION_AMOUNT + ") as total_amount " +
+                "FROM " + TABLE_TRANSACTION +
+                " WHERE " + COLUMN_TRANSACTION_DATE + " BETWEEN ? AND ? " +
+                "GROUP BY " + COLUMN_TRANSACTION_TYPE;
+        Cursor cursor = null;
+        if (db != null){
+            cursor = db.rawQuery(query, new String[]{tanggal1, tanggal2});
+        }
+        return cursor;
+    }
+
+
+    public Cursor getTotalAmountByCategory(String transactionType) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT " + COLUMN_TRANSACTION_CATEGORY_ID + ", SUM(" + COLUMN_TRANSACTION_AMOUNT + ") as total_amount " +
+                "FROM " + TABLE_TRANSACTION +
+                " WHERE " + COLUMN_TRANSACTION_TYPE + " = ? " +
+                "GROUP BY " + COLUMN_TRANSACTION_CATEGORY_ID;
+        Cursor cursor = null;
+        if (db != null){
+            cursor = db.rawQuery(query, new String[]{transactionType});
+        }
+        return cursor;
+    }
+
+    public Cursor getTotalAmountByCategoryByMonth(String transactionType, String tahunBulan) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT " + COLUMN_TRANSACTION_CATEGORY_ID + ", SUM(" + COLUMN_TRANSACTION_AMOUNT + ") as total_amount " +
+                "FROM " + TABLE_TRANSACTION +
+                " WHERE " + COLUMN_TRANSACTION_TYPE + " = ? " +
+                " AND strftime('%Y-%m', " + COLUMN_TRANSACTION_DATE + ") = ? " +
+                "GROUP BY " + COLUMN_TRANSACTION_CATEGORY_ID;
+        Cursor cursor = null;
+        if (db != null){
+            cursor = db.rawQuery(query, new String[]{transactionType, tahunBulan});
+        }
+        return cursor;
+    }
+
+    public Cursor getTotalAmountByCategoryByDate(String transactionType, String tanggal) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT " + COLUMN_TRANSACTION_CATEGORY_ID + ", SUM(" + COLUMN_TRANSACTION_AMOUNT + ") as total_amount " +
+                "FROM " + TABLE_TRANSACTION +
+                " WHERE " + COLUMN_TRANSACTION_TYPE + " = ? " +
+                " AND " + COLUMN_TRANSACTION_DATE + " = ? " +
+                "GROUP BY " + COLUMN_TRANSACTION_CATEGORY_ID;
+        Cursor cursor = null;
+        if (db != null){
+            cursor = db.rawQuery(query, new String[]{transactionType, tanggal});
+        }
+        return cursor;
+    }
+
+    public Cursor getTotalAmountByCategoryBetweenDate(String transactionType, String tanggal1, String tanggal2) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT " + COLUMN_TRANSACTION_CATEGORY_ID + ", SUM(" + COLUMN_TRANSACTION_AMOUNT + ") as total_amount " +
+                "FROM " + TABLE_TRANSACTION +
+                " WHERE " + COLUMN_TRANSACTION_TYPE + " = ? " +
+                " AND " + COLUMN_TRANSACTION_DATE + " BETWEEN ? AND ? " +
+                "GROUP BY " + COLUMN_TRANSACTION_CATEGORY_ID;
+        Cursor cursor = null;
+        if (db != null){
+            cursor = db.rawQuery(query, new String[]{transactionType, tanggal1, tanggal2});
+        }
+        return cursor;
+    }
 }
